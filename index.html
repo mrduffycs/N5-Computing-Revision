@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>National 5 Computing Science Workbooks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Plan: a quiet landing page; each workbook card carries its own unit colour, so the four units read as one set. */
+:root {
+  --bg: #ffffff;
+  --surface: #f4f5f6;
+  --ink: #16202a;
+  --muted: #56616c;
+  --line: #e1e5e9;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0e1216; --surface: #171d23; --ink: #eef2f5; --muted: #a5b0ba; --line: #29323b; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0e1216; --surface: #171d23; --ink: #eef2f5; --muted: #a5b0ba; --line: #29323b; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.55 var(--font-body); }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 48px clamp(16px, 4vw, 40px) 64px; }
+.eyebrow { font-weight: 700; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(32px, 5vw, 48px); line-height: 1.05; margin: 0 0 14px; text-wrap: balance; }
+.lede { font-size: 19px; color: var(--muted); max-width: 62ch; margin: 0 0 30px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 16px; }
+.card { --u: #555; display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; padding: 22px; border-radius: 16px; background: var(--surface); color: var(--ink); text-decoration: none; border: 2px solid transparent; transition: border-color .2s; }
+.card:hover, .card:focus-visible { border-color: var(--u); outline: none; }
+.chip { justify-self: start; font: 700 12px var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--u); padding: 4px 10px; border-radius: 99px; }
+.card h2 { font-family: var(--font-display); font-weight: 800; font-size: 25px; line-height: 1.15; margin: 0; text-wrap: balance; }
+.card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.meta { display: grid; gap: 8px; }
+.stats { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); }
+.bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--u); border-radius: 99px; }
+.open { font-weight: 700; color: var(--u); }
+.note { margin-top: 30px; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--line); font-size: 15.5px; color: var(--muted); max-width: 80ch; }
+.note b { color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card { --u: var(--ud); } }
+:root[data-theme="dark"] .card { --u: var(--ud); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">National 5 Computing Science · Qualifications Scotland</p>
+  <h1>Interactive workbooks</h1>
+  <p class="lede">One workbook for each area of the course. Learn a little, try it straight away and get instant feedback, with exam practice and a confidence check at the end of every chapter.</p>
+  <div class="grid" id="grid"></div>
+  <div class="note"><b>Your progress</b> is saved in this browser. To carry it to another device, or keep it safe on a shared computer, use <b>Download my progress</b> in each workbook and load the file next time.</div>
+</div>
+<script>
+const UNITS = [{"file": "n5-cs.html", "title": "Computer Systems", "blurb": "Binary, floating point, extended ASCII, bit-mapped and vector graphics, the processor and buses, translators, energy use and security.", "accent": "#c25a14", "accentDark": "#ec8a46", "key": "n5-cs-workbook-v1", "chapters": 8, "tasks": 42}, {"file": "n5-sdd.html", "title": "Software Design and Development", "blurb": "Design with structure diagrams, flowcharts, pseudocode and wireframes; then Python you run in the page: selection, loops, predefined functions and the three standard algorithms.", "accent": "#0f7c8c", "accentDark": "#3cb7c8", "key": "n5-sdd-workbook-v1", "chapters": 10, "tasks": 52}, {"file": "n5-ddd.html", "title": "Database Design and Development", "blurb": "Requirements, UK GDPR, entity-relationship diagrams, data dictionaries and validation, and SQL you run against a real database: SELECT, joins, INSERT, UPDATE and DELETE.", "accent": "#2563a8", "accentDark": "#6ea6ec", "key": "n5-ddd-workbook-v1", "chapters": 8, "tasks": 39}, {"file": "n5-wdd.html", "title": "Web Design and Development", "blurb": "Site structure, wireframes and prototypes, media file formats and copyright, HTML, CSS with classes and IDs, hyperlinks and mouse events, with a live preview.", "accent": "#6a4bb5", "accentDark": "#a58cf0", "key": "n5-wdd-workbook-v1", "chapters": 8, "tasks": 34}];
+function done(key) {
+  try {
+    const s = JSON.parse(localStorage.getItem(key) || "{}");
+    return Object.values(s.tasks || {}).filter((t) => t && ["correct", "shown", "marked"].includes(t.s)).length;
+  } catch (e) { return 0; }
+}
+document.getElementById("grid").innerHTML = UNITS.map((u, i) => {
+  const d = Math.min(done(u.key), u.tasks);
+  return `<a class="card" href="${u.file}" style="--u:${u.accent};--ud:${u.accentDark}">
+    <span class="chip">Area ${i + 1}</span>
+    <h2>${u.title}</h2>
+    <p>${u.blurb}</p>
+    <div class="meta"><div class="stats"><span>${u.chapters} chapters · ${u.tasks} tasks</span><span><b>${d}</b> done</span></div>
+    <div class="bar" role="progressbar" aria-label="${u.title} progress" aria-valuemin="0" aria-valuemax="${u.tasks}" aria-valuenow="${d}"><span style="width:${(100 * d) / u.tasks}%"></span></div>
+    <span class="open">${d ? "Continue" : "Start"} →</span></div></a>`;
+}).join("");
+</script>
+</body>
+</html>
